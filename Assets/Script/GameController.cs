@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject puzzleUI;
     public bool isPlayerDead = false;
     public bool isPuzzle = false;
+    public int coinScore;
 
     void Awake()
     {

@@ -5,9 +5,9 @@ public class StaminaSystem : MonoBehaviour
 {
     public float maxStamina = 100f;
     public float currentStamina;
-    public float drainRate = 5f; // berkurang 5 per detik
-    public Slider staminaSlider; // UI slider stamina
-
+    public float drainRate = 5f;
+    public Slider staminaSlider;
+    public Player player;
     private bool isRunning = true;
 
     void Start()
@@ -32,15 +32,15 @@ public class StaminaSystem : MonoBehaviour
 
             if (currentStamina <= 0)
             {
-                OnStaminaDepleted();
+                StaminaDepleted();
             }
         }
     }
 
-    void OnStaminaDepleted()
+    void StaminaDepleted()
     {
         isRunning = false;
-        Debug.Log("Stamina habis! Game Over atau player melambat?");
+        player.OnStaminaDepleted();
     }
 
     public void RefillStamina(float amount)
