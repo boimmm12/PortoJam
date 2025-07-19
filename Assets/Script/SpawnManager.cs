@@ -26,9 +26,9 @@ public class SpawnManager : MonoBehaviour
 
     private Vector2[] laneOffsets = new Vector2[3]
     {
-        new Vector2(1.25f, 2f),   // Atas
+        new Vector2(1.7f, 1.3f),   // Atas
         new Vector2(0f, 0f),      // Tengah
-        new Vector2(-1.25f, -2f)  // Bawah
+        new Vector2(-0.9f, -1.1f)  // Bawah
     };
 
     private List<GameObject> activeSpawns = new List<GameObject>();

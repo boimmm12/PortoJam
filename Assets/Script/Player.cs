@@ -15,9 +15,9 @@ public class Player : MonoBehaviour
         Vector2 startPos = transform.position;
         laneSwitchSpeed = normalspeed;
 
-        lanePositions[0] = startPos + new Vector2(1.25f, 2f);   // Atas
+        lanePositions[0] = startPos + new Vector2(1.7f, 1.3f);   // Atas
         lanePositions[1] = startPos + new Vector2(0f, 0f);   // Tengah
-        lanePositions[2] = startPos + new Vector2(-1.25f, -2f); // Bawah
+        lanePositions[2] = startPos + new Vector2(-0.9f, -1.1f); // Bawah
     }
 
     void Update()
