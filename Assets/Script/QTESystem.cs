@@ -1,25 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class QTESystem : MonoBehaviour
 {
     public GameObject DisplayBox;
     public GameObject PassBox;
 
-    private char targetKey;
-    private bool waitingForKey = false;
-    private bool isCountingDown = false;
     public StaminaSystem staminaSystem;
     public float staminaPenalty = 30f;
-    public bool isPassed = false;
     public PuzzleUI puzzleUI;
 
+    private List<char> targetKeys = new List<char>();
+    private int currentKeyIndex = 0;
+    public QTEItemUI[] qteItems;
+
+    private bool waitingForInput = false;
+    private bool isCountingDown = false;
+    public bool isPassed = false;
 
     void OnEnable()
     {
         isPassed = false;
-        waitingForKey = false;
+        waitingForInput = false;
         isCountingDown = false;
         PassBox.GetComponent<Text>().text = "";
         DisplayBox.GetComponent<Text>().text = "";
@@ -27,37 +31,74 @@ public class QTESystem : MonoBehaviour
 
     void Update()
     {
-        if (!waitingForKey)
+        if (!waitingForInput)
         {
-            GenerateRandomKey();
+            GenerateKeys();
         }
 
-        if (waitingForKey && Input.anyKeyDown)
+        if (waitingForInput && Input.anyKeyDown)
         {
-            // Bandingkan dengan huruf target
-            if (Input.GetKeyDown(targetKey.ToString().ToLower()))
+            if (currentKeyIndex < targetKeys.Count)
             {
-                StartCoroutine(KeyPressing(true));
-            }
-            else
-            {
-                StartCoroutine(KeyPressing(false));
+                char expectedKey = targetKeys[currentKeyIndex];
+
+                if (Input.GetKeyDown(expectedKey.ToString().ToLower()))
+                {
+                    Debug.Log("Tombol benar ditekan");
+                    qteItems[currentKeyIndex].MarkCorrect();
+                    currentKeyIndex++;
+                    UpdateDisplay();
+
+                    if (currentKeyIndex >= targetKeys.Count)
+                    {
+                        StartCoroutine(KeyPressing(true));
+                    }
+                }
+                else
+                {
+                    StartCoroutine(KeyPressing(false));
+                }
             }
         }
     }
 
-    void GenerateRandomKey()
+    void GenerateKeys()
     {
-        targetKey = (char)Random.Range(65, 91); // ASCII 'A'(65) to 'Z'(90)
-        DisplayBox.GetComponent<Text>().text = "[" + targetKey + "]";
-        waitingForKey = true;
+        targetKeys.Clear();
+        currentKeyIndex = 0;
+
+        for (int i = 0; i < 3; i++)
+        {
+            char randomChar = (char)Random.Range(65, 91); // A-Z
+            targetKeys.Add(randomChar);
+        }
+
+        UpdateDisplay();
+        waitingForInput = true;
         isCountingDown = true;
         StartCoroutine(CountDown());
     }
 
+    void UpdateDisplay()
+    {
+        for (int i = 0; i < qteItems.Length; i++)
+        {
+            if (i < targetKeys.Count)
+            {
+                qteItems[i].SetLetter(targetKeys[i], i < currentKeyIndex); // tambahkan param status
+            }
+            else
+            {
+                qteItems[i].SetLetter(' ', false);
+            }
+        }
+    }
+
+
+
     IEnumerator KeyPressing(bool correct)
     {
-        waitingForKey = false;
+        waitingForInput = false;
         isCountingDown = false;
 
         if (correct)
@@ -75,8 +116,10 @@ public class QTESystem : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         PassBox.GetComponent<Text>().text = "";
         DisplayBox.GetComponent<Text>().text = "";
-    }
 
+        if (puzzleUI != null)
+            puzzleUI.ClosePuzzle();
+    }
 
     IEnumerator CountDown()
     {
@@ -86,7 +129,7 @@ public class QTESystem : MonoBehaviour
         if (isCountingDown)
         {
             isCountingDown = false;
-            waitingForKey = false;
+            waitingForInput = false;
             PassBox.GetComponent<Text>().text = "Timeout!";
             Debug.LogWarning("Timeout");
 
@@ -97,6 +140,4 @@ public class QTESystem : MonoBehaviour
                 puzzleUI.ClosePuzzle();
         }
     }
-
-
 }

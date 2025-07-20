@@ -68,6 +68,11 @@ public class SpawnManager : MonoBehaviour
         {
             Vector2 coinPos = startPos + Vector2.right * (coinSpacing * i);
             GameObject coin = Instantiate(coinPrefab, coinPos, Quaternion.identity);
+
+            LaneObject laneObj = coin.GetComponent<LaneObject>();
+            if (laneObj != null)
+                laneObj.SetLane(laneIndex);
+
             activeSpawns.Add(coin);
         }
     }
@@ -88,6 +93,11 @@ public class SpawnManager : MonoBehaviour
         }
 
         GameObject spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
+
+        LaneObject laneObj = spawned.GetComponent<LaneObject>();
+        if (laneObj != null)
+            laneObj.SetLane(laneIndex);
+
         activeSpawns.Add(spawned);
     }
 }
