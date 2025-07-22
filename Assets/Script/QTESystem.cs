@@ -7,6 +7,7 @@ public class QTESystem : MonoBehaviour
 {
     public GameObject DisplayBox;
     public GameObject PassBox;
+    public GameObject finalSuccessImage;
 
     public StaminaSystem staminaSystem;
     public float staminaPenalty = 30f;
@@ -17,16 +18,15 @@ public class QTESystem : MonoBehaviour
     public QTEItemUI[] qteItems;
 
     private bool waitingForInput = false;
-    private bool isCountingDown = false;
     public bool isPassed = false;
 
     void OnEnable()
     {
         isPassed = false;
         waitingForInput = false;
-        isCountingDown = false;
         PassBox.GetComponent<Text>().text = "";
         DisplayBox.GetComponent<Text>().text = "";
+        finalSuccessImage.SetActive(false);
     }
 
     void Update()
@@ -51,12 +51,13 @@ public class QTESystem : MonoBehaviour
 
                     if (currentKeyIndex >= targetKeys.Count)
                     {
-                        StartCoroutine(KeyPressing(true));
+                        waitingForInput = false;
+                        StartCoroutine(ShowFinalAndClose());
                     }
                 }
                 else
                 {
-                    StartCoroutine(KeyPressing(false));
+                    KeyPressing(false);
                 }
             }
         }
@@ -75,8 +76,6 @@ public class QTESystem : MonoBehaviour
 
         UpdateDisplay();
         waitingForInput = true;
-        isCountingDown = true;
-        StartCoroutine(CountDown());
     }
 
     void UpdateDisplay()
@@ -85,7 +84,7 @@ public class QTESystem : MonoBehaviour
         {
             if (i < targetKeys.Count)
             {
-                qteItems[i].SetLetter(targetKeys[i], i < currentKeyIndex); // tambahkan param status
+                qteItems[i].SetLetter(targetKeys[i], i < currentKeyIndex);
             }
             else
             {
@@ -94,50 +93,33 @@ public class QTESystem : MonoBehaviour
         }
     }
 
-
-
-    IEnumerator KeyPressing(bool correct)
+    void KeyPressing(bool correct)
     {
         waitingForInput = false;
-        isCountingDown = false;
 
         if (correct)
         {
             PassBox.GetComponent<Text>().text = "Pass!";
             isPassed = true;
+            finalSuccessImage.SetActive(true);
         }
         else
         {
             PassBox.GetComponent<Text>().text = "Fail!";
-            if (staminaSystem != null)
-                staminaSystem.ReduceStamina(staminaPenalty);
+            staminaSystem.ReduceStamina(staminaPenalty);
         }
-
-        yield return new WaitForSeconds(1.5f);
         PassBox.GetComponent<Text>().text = "";
         DisplayBox.GetComponent<Text>().text = "";
-
-        if (puzzleUI != null)
-            puzzleUI.ClosePuzzle();
+        finalSuccessImage.SetActive(true);
     }
-
-    IEnumerator CountDown()
+    IEnumerator ShowFinalAndClose()
     {
-        float waitTime = puzzleUI != null ? puzzleUI.duration : 3f;
-        yield return new WaitForSeconds(waitTime);
+        PassBox.GetComponent<Text>().text = "Pass!";
+        isPassed = true;
+        finalSuccessImage.SetActive(true);
 
-        if (isCountingDown)
-        {
-            isCountingDown = false;
-            waitingForInput = false;
-            PassBox.GetComponent<Text>().text = "Timeout!";
-            Debug.LogWarning("Timeout");
+        yield return new WaitForSecondsRealtime(0.5f);
 
-            if (staminaSystem != null)
-                staminaSystem.ReduceStamina(staminaPenalty);
-
-            if (puzzleUI != null)
-                puzzleUI.ClosePuzzle();
-        }
+        puzzleUI.ClosePuzzle();
     }
 }
