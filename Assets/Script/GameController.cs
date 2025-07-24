@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -9,8 +11,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField] public float GlobalSpeed = 5f;
     [SerializeField] GameObject puzzleUI;
+    [SerializeField] Text coinText;
     public bool isPlayerDead = false;
     public bool isPuzzle = false;
+    public int coinScore;
 
     void Awake()
     {
@@ -38,6 +42,8 @@ public class GameController : MonoBehaviour
         {
             puzzleUI.SetActive(true);
         }
+
+        coinText.text = "" + coinScore;
     }
 
 }

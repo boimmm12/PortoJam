@@ -24,7 +24,7 @@ public class PuzzleUI : MonoBehaviour
         if (timerText != null)
             timerText.text = remaining.ToString("F1");
 
-        if (timer >= duration || qteSystem.isPassed)
+        if ((timer >= duration || qteSystem.isPassed) && !qteSystem.finalSuccessImage.activeSelf)
         {
             ClosePuzzle();
         }

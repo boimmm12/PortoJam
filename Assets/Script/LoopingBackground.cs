@@ -8,6 +8,5 @@ public class LoopingBackground : MonoBehaviour
     void Update()
     {
        backgroundRenderer.material.mainTextureOffset += new Vector2(backgroundSpeed * Time.deltaTime, 0f);
-
     }
 }
