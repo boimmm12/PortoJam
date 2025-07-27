@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bengkoang_0: 37499960507122786
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

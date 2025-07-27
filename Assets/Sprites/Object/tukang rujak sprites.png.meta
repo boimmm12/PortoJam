@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tukang rujak sprites_0: -5744126289031573934
+      tukang rujak sprites_1: -7142340964014431755
+      tukang rujak sprites_2: 4000035399868344543
+      tukang rujak sprites_3: 6171563685426106711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

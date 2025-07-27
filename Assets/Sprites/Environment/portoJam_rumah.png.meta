@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      portoJam_rumah_0: 2056538062829541921
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      portoJam_tiang listrik_0: 7517852886720208594
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

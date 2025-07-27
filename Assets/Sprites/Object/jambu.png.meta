@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      jambu_0: 790403718665308574
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
