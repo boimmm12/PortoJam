@@ -8,9 +8,6 @@ public class QTESystem : MonoBehaviour
     public GameObject DisplayBox;
     public GameObject PassBox;
     public GameObject finalSuccessImage;
-
-    public StaminaSystem staminaSystem;
-    public float staminaPenalty = 30f;
     public PuzzleUI puzzleUI;
 
     private List<char> targetKeys = new List<char>();
@@ -106,7 +103,6 @@ public class QTESystem : MonoBehaviour
         else
         {
             PassBox.GetComponent<Text>().text = "Fail!";
-            staminaSystem.ReduceStamina(staminaPenalty);
         }
         PassBox.GetComponent<Text>().text = "";
         DisplayBox.GetComponent<Text>().text = "";

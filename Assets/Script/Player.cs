@@ -4,7 +4,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float laneSwitchSpeed;
     public float normalspeed = 10f;
-    public float depletedspeed = 2f;
     private LaneObject laneObject;
 
     private Vector2[] lanePositions = new Vector2[3];
@@ -36,9 +35,5 @@ public class Player : MonoBehaviour
 
         if (laneObject != null)
             laneObject.SetLane(currentLane);
-    }
-    public void OnStaminaDepleted()
-    {
-        laneSwitchSpeed = depletedspeed;
     }
 }

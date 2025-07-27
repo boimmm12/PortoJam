@@ -26,7 +26,7 @@ public class PuzzleUI : MonoBehaviour
 
         if ((timer >= duration || qteSystem.isPassed) && !qteSystem.finalSuccessImage.activeSelf)
         {
-            ClosePuzzle();
+            GameController.Instance.isPlayerDead= true;
         }
     }
 

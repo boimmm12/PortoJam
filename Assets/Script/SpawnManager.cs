@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class SpawnManager : MonoBehaviour
 {
     [Header("Obstacle Settings")]
-    public GameObject obstaclePrefab;
+    public List<GameObject> obstaclePrefabs;
     public float obstacleSpawnRate = 1.5f;
 
     [Header("Puzzle Settings")]
-    public GameObject puzzleTriggerPrefab;
+    public List<GameObject> puzzleTriggerPrefabs;
     public float puzzleSpawnRate = 4f;
 
     [Header("General")]
@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     private float nextPuzzleTime = 0f;
 
     [Header("Coin Settings")]
-    public GameObject coinPrefab;
+    public List<GameObject> coinPrefabs;
     public float coinSpawnRate = 2f;
     public int maxCoinsPerGroup = 5;
     public float coinSpacing = 1.2f;
@@ -37,13 +37,13 @@ public class SpawnManager : MonoBehaviour
     {
         if (Time.time >= nextObstacleTime)
         {
-            TrySpawn(obstaclePrefab);
+            TrySpawn(obstaclePrefabs);
             nextObstacleTime = Time.time + obstacleSpawnRate;
         }
 
         if (Time.time >= nextPuzzleTime)
         {
-            TrySpawn(puzzleTriggerPrefab);
+            TrySpawn(puzzleTriggerPrefabs);
             nextPuzzleTime = Time.time + puzzleSpawnRate;
         }
 
@@ -66,8 +66,10 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < coinCount; i++)
         {
+            GameObject selectedCoinPrefab = coinPrefabs[Random.Range(0, coinPrefabs.Count)];
+
             Vector2 coinPos = startPos + Vector2.right * (coinSpacing * i);
-            GameObject coin = Instantiate(coinPrefab, coinPos, Quaternion.identity);
+            GameObject coin = Instantiate(selectedCoinPrefab, coinPos, Quaternion.identity);
 
             LaneObject laneObj = coin.GetComponent<LaneObject>();
             if (laneObj != null)
@@ -77,7 +79,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    void TrySpawn(GameObject prefab)
+    void TrySpawn(List<GameObject> prefabList)
     {
         int laneIndex = Random.Range(0, laneOffsets.Length);
         Vector2 spawnPos = (Vector2)transform.position + laneOffsets[laneIndex];
@@ -92,7 +94,8 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        GameObject spawned = Instantiate(prefab, spawnPos, Quaternion.identity);
+        GameObject selectedPrefab = prefabList[Random.Range(0, prefabList.Count)];
+        GameObject spawned = Instantiate(selectedPrefab, spawnPos, Quaternion.identity);
 
         LaneObject laneObj = spawned.GetComponent<LaneObject>();
         if (laneObj != null)
