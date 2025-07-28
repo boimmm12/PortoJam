@@ -135,10 +135,10 @@ TextureImporter:
       name: portoJam_gedung_0
       rect:
         serializedVersion: 2
-        x: 140
-        y: 297
-        width: 295
-        height: 607
+        x: 10
+        y: 3
+        width: 293
+        height: 605
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +157,10 @@ TextureImporter:
       name: portoJam_gedung_1
       rect:
         serializedVersion: 2
-        x: 458
-        y: 298
-        width: 577
-        height: 535
+        x: 328
+        y: 4
+        width: 575
+        height: 533
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +179,10 @@ TextureImporter:
       name: portoJam_gedung_2
       rect:
         serializedVersion: 2
-        x: 1077
-        y: 298
-        width: 707
-        height: 660
+        x: 947
+        y: 4
+        width: 705
+        height: 658
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1a6b939a1585298439422e04f9888e24
     internalID: 0
     vertices: []
     indices: 

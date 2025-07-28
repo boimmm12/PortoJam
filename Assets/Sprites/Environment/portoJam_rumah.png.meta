@@ -129,10 +129,10 @@ TextureImporter:
       name: portoJam_rumah_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 305
-        width: 1891
-        height: 507
+        x: 14
+        y: 1
+        width: 1889
+        height: 505
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e6dcf714a6247774eaf102a70ff2980f
     internalID: 0
     vertices: []
     indices: 

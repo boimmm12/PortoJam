@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 public class QTESystem : MonoBehaviour
 {
-    public GameObject DisplayBox;
-    public GameObject PassBox;
     public GameObject finalSuccessImage;
     public PuzzleUI puzzleUI;
 
+    public QTEItemUI[] qteItems;
+
+    private List<char> allowedKeys = new List<char> { 'b', 'd', 'h', 'k', 'm', 'y' };
     private List<char> targetKeys = new List<char>();
     private int currentKeyIndex = 0;
-    public QTEItemUI[] qteItems;
 
     private bool waitingForInput = false;
     public bool isPassed = false;
@@ -21,9 +21,10 @@ public class QTESystem : MonoBehaviour
     {
         isPassed = false;
         waitingForInput = false;
-        PassBox.GetComponent<Text>().text = "";
-        DisplayBox.GetComponent<Text>().text = "";
+        currentKeyIndex = 0;
         finalSuccessImage.SetActive(false);
+
+        GenerateKeys();
     }
 
     void Update()
@@ -31,17 +32,17 @@ public class QTESystem : MonoBehaviour
         if (!waitingForInput)
         {
             GenerateKeys();
-        }
-
+            }
         if (waitingForInput && Input.anyKeyDown)
         {
+
             if (currentKeyIndex < targetKeys.Count)
             {
                 char expectedKey = targetKeys[currentKeyIndex];
+                KeyCode expectedKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), expectedKey.ToString().ToUpper());
 
-                if (Input.GetKeyDown(expectedKey.ToString().ToLower()))
+                if (Input.GetKeyDown(expectedKeyCode))
                 {
-                    Debug.Log("Tombol benar ditekan");
                     qteItems[currentKeyIndex].MarkCorrect();
                     currentKeyIndex++;
                     UpdateDisplay();
@@ -49,7 +50,7 @@ public class QTESystem : MonoBehaviour
                     if (currentKeyIndex >= targetKeys.Count)
                     {
                         waitingForInput = false;
-                        StartCoroutine(ShowFinalAndClose());
+                        StartCoroutine(ShowFinalAndClose(true));
                     }
                 }
                 else
@@ -58,6 +59,7 @@ public class QTESystem : MonoBehaviour
                 }
             }
         }
+
     }
 
     void GenerateKeys()
@@ -67,7 +69,7 @@ public class QTESystem : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            char randomChar = (char)Random.Range(65, 91); // A-Z
+            char randomChar = allowedKeys[Random.Range(0, allowedKeys.Count)];
             targetKeys.Add(randomChar);
         }
 
@@ -81,11 +83,13 @@ public class QTESystem : MonoBehaviour
         {
             if (i < targetKeys.Count)
             {
-                qteItems[i].SetLetter(targetKeys[i], i < currentKeyIndex);
+                char letter = targetKeys[i];
+                qteItems[i].InitSprites();
+                qteItems[i].SetLetter(letter);
             }
             else
             {
-                qteItems[i].SetLetter(' ', false);
+                qteItems[i].Clear();
             }
         }
     }
@@ -96,26 +100,24 @@ public class QTESystem : MonoBehaviour
 
         if (correct)
         {
-            PassBox.GetComponent<Text>().text = "Pass!";
+            isPassed = true;
+            finalSuccessImage.SetActive(true);
+        }
+    }
+
+    IEnumerator ShowFinalAndClose(bool isSuccess)
+    {
+        if (isSuccess)
+        {
             isPassed = true;
             finalSuccessImage.SetActive(true);
         }
         else
         {
-            PassBox.GetComponent<Text>().text = "Fail!";
+            isPassed = false;
+            finalSuccessImage.SetActive(false);
         }
-        PassBox.GetComponent<Text>().text = "";
-        DisplayBox.GetComponent<Text>().text = "";
-        finalSuccessImage.SetActive(true);
-    }
-    IEnumerator ShowFinalAndClose()
-    {
-        PassBox.GetComponent<Text>().text = "Pass!";
-        isPassed = true;
-        finalSuccessImage.SetActive(true);
-
         yield return new WaitForSecondsRealtime(0.5f);
-
         puzzleUI.ClosePuzzle();
     }
 }

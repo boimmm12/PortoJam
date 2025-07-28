@@ -25,7 +25,6 @@ public class Obstacle : MonoBehaviour
         }
         else if (collision.CompareTag("Player"))
         {
-            Destroy(player);
             GameController.Instance.isPlayerDead= true;
         }
     }

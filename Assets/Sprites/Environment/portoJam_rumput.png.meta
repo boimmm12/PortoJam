@@ -129,10 +129,10 @@ TextureImporter:
       name: portoJam_rumput_0
       rect:
         serializedVersion: 2
-        x: 254
-        y: 400
-        width: 1486
-        height: 246
+        x: 0
+        y: 0
+        width: 1479
+        height: 242
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 37b93b93dc96cf3428f4efb7a2ff9158
     internalID: 0
     vertices: []
     indices: 

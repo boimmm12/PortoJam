@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: ffc1f6d0a0d7cef4384faf6a986ad6eb
+guid: 5351fd979dc8a58499e1b43611f91fe5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2365288977080923855
-    second: portoJam_gedung bayangan_0
-  - first:
-      213: -2752328027036787227
-    second: portoJam_gedung bayangan_1
-  - first:
-      213: -8780655861186866293
-    second: portoJam_gedung bayangan_2
+      213: -1961608767140191558
+    second: jambubenar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,9 +40,9 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -103,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -116,7 +110,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: portoJam_gedung bayangan_0
+      name: jambubenar_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 293
-        height: 605
+        x: 175
+        y: 174
+        width: 153
+        height: 163
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,52 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 139c1f9053ecc2fd0800000000000000
-      internalID: -2365288977080923855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: portoJam_gedung bayangan_1
-      rect:
-        serializedVersion: 2
-        x: 318
-        y: 2
-        width: 575
-        height: 533
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5edde1bed34cdc9d0800000000000000
-      internalID: -2752328027036787227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: portoJam_gedung bayangan_2
-      rect:
-        serializedVersion: 2
-        x: 937
-        y: 2
-        width: 704
-        height: 658
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b8351032408d42680800000000000000
-      internalID: -8780655861186866293
+      spriteID: ab221562837f6c4e0800000000000000
+      internalID: -1961608767140191558
       vertices: []
       indices: 
       edges: []
@@ -201,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b2c5a3a651899e44e96ba039f3400d59
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      portoJam_gedung bayangan_0: -2365288977080923855
-      portoJam_gedung bayangan_1: -2752328027036787227
-      portoJam_gedung bayangan_2: -8780655861186866293
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
